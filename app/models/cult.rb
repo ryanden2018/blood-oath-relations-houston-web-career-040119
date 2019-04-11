@@ -40,6 +40,7 @@ class Cult
     end
 
     def self.find_by_founding_year(year)
+        self.all.select { |cult| cult.founding_year == year }
     end
 
 end
