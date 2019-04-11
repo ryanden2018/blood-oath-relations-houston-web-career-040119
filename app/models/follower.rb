@@ -53,9 +53,7 @@ class Follower
 
     def fellow_cult_members 
         Follower.all.select do |follower|
-            test1 = follower.cults.all? { |cult| self.cults.include?(cult) }
-            test2 = self.cults.all? { |cult| follower.cults.include?(cult) }
-            test1 & test2 
+            follower.cults.any? { |cult| self.cults.include?(cult) } 
         end.delete_if { |x| x == self }
     end
 end
