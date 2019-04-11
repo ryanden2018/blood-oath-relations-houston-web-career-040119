@@ -43,4 +43,25 @@ class Cult
         self.all.select { |cult| cult.founding_year == year }
     end
 
+    def average_age
+        followers.inject(0) { |sum,follower| sum += follower.age }.to_f / followers.length.to_f 
+    end
+
+    def my_followers_mottos 
+        followers.map { |follower| follower.life_motto }.uniq.delete_if { |x| x == nil }
+    end
+
+    def self.least_popular
+        self.all.min_by { |cult| cult.followers.length }
+    end
+
+    def self.locations 
+        self.all.map { |cult| cult.location }.uniq 
+    end
+
+    def self.most_common_location
+        self.locations.max_by do |location|
+            self.all.select { |cult| cult.location == location }.length 
+        end
+    end
 end

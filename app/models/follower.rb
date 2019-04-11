@@ -29,4 +29,18 @@ class Follower
     def self.of_a_certain_age(age)
         self.all.select { |follower| follower.age >= age }
     end
+
+    def my_cults_slogans
+        slogans = self.cults.map { |cult| cult.slogan }.uniq 
+        slogans.each { |slogan| puts slogan }
+        slogans 
+    end
+
+    def self.most_active 
+        self.all.max_by { |follower| follower.cults.length }
+    end
+
+    def self.top_ten 
+        self.all.sort_by { |follower| follower.cults.length*(-1) }.slice(0,10)
+    end
 end
