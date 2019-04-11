@@ -32,7 +32,7 @@ class Cult
     end
 
     def bloodoaths
-        BloodOath.select { |bloodoath| bloodoath.cult == self } 
+        BloodOath.all.select { |bloodoath| bloodoath.cult == self } 
     end
 
     def followers
@@ -56,7 +56,9 @@ class Cult
     end
 
     def my_followers_mottos 
-        followers.map { |follower| follower.life_motto }.uniq.delete_if { |x| x == nil }
+        mottos = followers.map { |follower| follower.life_motto }.uniq.delete_if { |x| x == nil }
+        mottos.each { |motto| puts motto }
+        mottos 
     end
 
     def self.least_popular

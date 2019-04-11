@@ -15,7 +15,7 @@ class Follower
     end
 
     def bloodoaths
-        BloodOath.select { |bloodoath| bloodoath.follower == self } 
+        BloodOath.all.select { |bloodoath| bloodoath.follower == self } 
     end
 
     def cults 
@@ -30,7 +30,7 @@ class Follower
             end
         end
 
-        bloodoaths.new(cult,self)
+        BloodOath.new(cult,self)
     end
     
     def self.of_a_certain_age(age)
@@ -52,10 +52,10 @@ class Follower
     end
 
     def fellow_cult_members 
-        Followers.all.select do |follower|
+        Follower.all.select do |follower|
             test1 = follower.cults.all? { |cult| self.cults.include?(cult) }
             test2 = self.cults.all? { |cult| follower.cults.include?(cult) }
             test1 & test2 
-        end
+        end.delete_if { |x| x == self }
     end
 end

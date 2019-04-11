@@ -1,3 +1,5 @@
+require 'date'
+
 class BloodOath
     attr_accessor :initiation_date, :cult, :follower
 
@@ -22,6 +24,4 @@ class BloodOath
             Date.new(year,month,day).to_time.to_i 
          end
     end
-
-
 end
